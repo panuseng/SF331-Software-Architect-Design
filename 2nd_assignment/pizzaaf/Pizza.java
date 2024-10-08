@@ -1,7 +1,6 @@
-package headfirst.designpatterns.factory.pizzaaf;
-
 public abstract class Pizza {
 	String name;
+    double cost;
 
 	Dough dough;
 	Sauce sauce;
@@ -11,6 +10,10 @@ public abstract class Pizza {
 	Clams clam;
 
 	abstract void prepare();
+
+    void setCost(double cost) {
+        this.cost = cost;
+    }
 
 	void bake() {
 		System.out.println("Bake for 25 minutes at 350");
@@ -31,6 +34,10 @@ public abstract class Pizza {
 	String getName() {
 		return name;
 	}
+
+    double getCost() {
+        return cost;
+    }
 
 	public String toString() {
 		StringBuffer result = new StringBuffer();
@@ -65,5 +72,69 @@ public abstract class Pizza {
 			result.append("\n");
 		}
 		return result.toString();
+	}
+}
+
+class CheesePizza extends Pizza {
+	PizzaIngredientFactory ingredientFactory;
+ 
+	public CheesePizza(PizzaIngredientFactory ingredientFactory) {
+		this.ingredientFactory = ingredientFactory;
+	}
+ 
+	void prepare() {
+		System.out.println("Preparing " + name);
+		dough = ingredientFactory.createDough();
+		sauce = ingredientFactory.createSauce();
+		cheese = ingredientFactory.createCheese();
+	}
+}
+
+class ClamPizza extends Pizza {
+	PizzaIngredientFactory ingredientFactory;
+ 
+	public ClamPizza(PizzaIngredientFactory ingredientFactory) {
+		this.ingredientFactory = ingredientFactory;
+	}
+ 
+	void prepare() {
+		System.out.println("Preparing " + name);
+		dough = ingredientFactory.createDough();
+		sauce = ingredientFactory.createSauce();
+		cheese = ingredientFactory.createCheese();
+		clam = ingredientFactory.createClam();
+	}
+}
+
+class PepperoniPizza extends Pizza {
+	PizzaIngredientFactory ingredientFactory;
+ 
+	public PepperoniPizza(PizzaIngredientFactory ingredientFactory) {
+		this.ingredientFactory = ingredientFactory;
+	}
+ 
+	void prepare() {
+		System.out.println("Preparing " + name);
+		dough = ingredientFactory.createDough();
+		sauce = ingredientFactory.createSauce();
+		cheese = ingredientFactory.createCheese();
+		veggies = ingredientFactory.createVeggies();
+		pepperoni = ingredientFactory.createPepperoni();
+	}
+}
+
+class VeggiePizza extends Pizza {
+	PizzaIngredientFactory ingredientFactory;
+ 
+	public VeggiePizza(PizzaIngredientFactory ingredientFactory) {
+		this.ingredientFactory = ingredientFactory;
+	}
+ 
+	void prepare() {
+		System.out.println("Preparing " + name);
+		dough = ingredientFactory.createDough();
+		sauce = ingredientFactory.createSauce();
+		cheese = ingredientFactory.createCheese();
+		veggies = ingredientFactory.createVeggies();
 	}
 }
